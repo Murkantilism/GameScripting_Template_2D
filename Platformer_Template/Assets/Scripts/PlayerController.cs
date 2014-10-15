@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// movement config
 	public float gravity = -15f;
-	public float runSpeed = 8f;
+	public float runSpeed = 6f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
+	public float jumpHeight = 1.5f;
 	// public float jumpWaitTime = 2.0;
 	
 	[HideInInspector]
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Awake(){
-		_animator = GetComponent<Animator>();
+		//_animator = GetComponent<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 		_controller.onControllerCollidedEvent += onControllerCollider;
 	}
@@ -100,8 +101,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			//to avoid DOUBLE JUMP
 			if( _controller.isGrounded ) {
-				var targetJumpHeight = 2f;
-				velocity.y = Mathf.Sqrt( 2f * targetJumpHeight * -gravity );  
+				velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );  
 				//_animator.Play( Animator.StringToHash( "Jump" ) ); 
 			}
 		}
