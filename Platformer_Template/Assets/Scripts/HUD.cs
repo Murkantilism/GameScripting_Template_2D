@@ -83,6 +83,7 @@ public class HUD : MonoBehaviour {
 			heart1 = heart_empty_sprr;
 		}else if(numLives == 0){
 			heart0 = heart_empty_sprr;
+			Application.LoadLevel("LoseScene");
 			deadP = true;
 		}
 		

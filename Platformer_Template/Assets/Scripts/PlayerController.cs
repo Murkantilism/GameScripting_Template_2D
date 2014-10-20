@@ -56,12 +56,9 @@ public class PlayerController : MonoBehaviour {
 			hud.KeyAqcuired();
 		}
 		
-		if(Input.GetKeyUp(KeyCode.D)){
-			hud.IncrementCups();
-		}
-		
-		if(Input.GetKeyUp(KeyCode.F)){
+		if(Input.GetKeyUp(KeyCode.Space)){
 			hud.DecrementCups();
+			SmashCoffee();
 		}
 		
 		// grab our current velocity to use as a base for all calculations
@@ -115,5 +112,9 @@ public class PlayerController : MonoBehaviour {
 		velocity.y += gravity * Time.deltaTime;
 		
 		_controller.move( velocity * Time.deltaTime );
+	}
+	
+	void SmashCoffee(){
+		Debug.Log("COFFEE SMASH!");
 	}
 }
