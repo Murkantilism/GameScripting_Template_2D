@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	HUD hud;
+	GameObject hud;
 	
 	// movement config
 	public float gravity = -15f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		hud = GameObject.Find("HUD").GetComponent<HUD>();
+		hud = GameObject.Find("HUD");
 	}
 	
 	void Awake(){
@@ -35,6 +35,12 @@ public class PlayerController : MonoBehaviour {
 		_controller = GetComponent<CharacterController2D>();
 		_controller.onControllerCollidedEvent += onControllerCollider;
 	}
+	
+	#region eventlisteners
+	void IncrementRunSpeed(){
+		runSpeed += 1;
+	}
+	#endregion
 	
 	void onControllerCollider( RaycastHit2D hit ){
 		// bail out on plain old ground hits
@@ -49,15 +55,15 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{
 		if(Input.GetKeyUp(KeyCode.A)){
-			hud.DecrementLives(true);
+			hud.SendMessage("DecrementLives", true);
 		}
 		
 		if(Input.GetKeyUp(KeyCode.Z)){
-			hud.KeyAqcuired();
+			hud.SendMessage("KeyAqcuired");
 		}
 		
 		if(Input.GetKeyUp(KeyCode.Space)){
-			hud.DecrementCups();
+			hud.SendMessage("DecrementCups");
 			SmashCoffee();
 		}
 		
