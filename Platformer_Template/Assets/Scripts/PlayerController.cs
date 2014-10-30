@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	public float normalizedHorizontalSpeed = 0;
 	
 	CharacterController2D _controller;
-	Animator _animator;
+	public Animator _animator;
 	public RaycastHit2D lastControllerColliderHit;
 	
 	[HideInInspector]
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Awake(){
-		//_animator = GetComponent<Animator>();
+		_animator = GetComponent<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 		_controller.onControllerCollidedEvent += onControllerCollider;
 	}
@@ -79,8 +79,8 @@ public class PlayerController : MonoBehaviour {
 			if( transform.localScale.x < 0f )
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 			
-			//if( _controller.isGrounded )
-				//_animator.Play( Animator.StringToHash( "Run" ) );
+			if( _controller.isGrounded )
+				_animator.Play( Animator.StringToHash( "run" ) );
 		}
 		else if( Input.GetKey( KeyCode.LeftArrow ) )
 		{
@@ -88,15 +88,15 @@ public class PlayerController : MonoBehaviour {
 			if( transform.localScale.x > 0f )
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 			
-			//if( _controller.isGrounded )
-				//_animator.Play( Animator.StringToHash( "Run" ) );
+			if( _controller.isGrounded )
+				_animator.Play( Animator.StringToHash( "run" ) );
 		}
 		else
 		{
 			normalizedHorizontalSpeed = 0;
 			
-			//if( _controller.isGrounded )
-				//_animator.Play( Animator.StringToHash( "Idle" ) );
+			if( _controller.isGrounded )
+				_animator.Play( Animator.StringToHash( "idle" ) );
 		}
 		
 		
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 			//to avoid DOUBLE JUMP
 			if( _controller.isGrounded ) {
 				velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );  
-				//_animator.Play( Animator.StringToHash( "Jump" ) ); 
+				_animator.Play( Animator.StringToHash( "jump" ) ); 
 			}
 		}
 		
