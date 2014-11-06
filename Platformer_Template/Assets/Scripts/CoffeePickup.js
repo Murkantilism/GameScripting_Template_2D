@@ -8,9 +8,8 @@ function Start () {
 
 	hud = GameObject.FindGameObjectWithTag("HUD").GetComponent(HUD);
 }
-
+// When the player picks up a coffee, increase the score and his speed
 function OnTriggerEnter2D(col : Collider2D){
-	// When the player picks up a coffee, increase the score and his speed
 	if (col.name == "Player"){
 		hud.numCups += 1;
 		
